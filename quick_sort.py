@@ -21,5 +21,19 @@ def quick_sort(arr):
         first_part.append(arr[i])
         return first_part + sec_part
     
-alist=[9,8,11,23,1,2,4]
-print quick_sort(alist)    
+
+def bubble_sort(arr):
+    for i in range(len(arr)-1):
+        for j in range(len(arr)-1-i):
+            if arr[j]>arr[j+1]:
+                arr[j], arr[j+1]=arr[j+1], arr[j]
+    return arr
+
+def select_sort(arr):
+    for i in range(len(arr)-1):
+        max_idx=0
+        for j in range(len(arr)-1-i):
+            if arr[j+1]>arr[max_idx]:
+                max_idx=j+1
+        arr[max_idx],arr[len(arr)-1-i] = arr[len(arr)-1-i], arr[max_idx]
+    return arr
