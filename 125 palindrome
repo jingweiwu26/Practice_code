@@ -1,0 +1,15 @@
+class Solution(object):
+    def isPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+
+        clean_s=[x.lower() for x in s if x.isalnum()]
+        if not clean_s:
+            return True
+        half_size=len(clean_s)/2
+        for i in zip(clean_s[:half_size], clean_s[::-1][:half_size]):
+            if i[0] != i[1]:
+                return False
+        return True
