@@ -37,3 +37,17 @@ def select_sort(arr):
                 max_idx=j+1
         arr[max_idx],arr[len(arr)-1-i] = arr[len(arr)-1-i], arr[max_idx]
     return arr
+
+def count_sort(arr):
+    res=[]
+    max_val=max(arr)
+    count=[0] * (max_val+1)
+    for i in arr:
+        count[i]+=1
+
+    for j in range(len(count)):
+            for k in range(count[j]):
+                res.append(j)
+    return res
+
+
