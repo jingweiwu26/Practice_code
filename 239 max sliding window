@@ -1,0 +1,14 @@
+from collections import deque
+class Solution(object):
+    def maxSlidingWindow(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        res=[]
+        dq=deque(maxlen=k)
+        for i in nums:
+            dq.append(i)
+            res.append(max(dq))
+        return res[k-1:]
