@@ -1,0 +1,12 @@
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        l = g = -0x7FFFFFFF
+        for num in nums:
+            l = max(num, l+num)
+            g = max(g, l)
+            
+        return g
