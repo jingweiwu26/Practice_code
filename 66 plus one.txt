@@ -1,0 +1,20 @@
+class Solution(object):
+    def plusOne(self, digits):
+        """
+        :type digits: List[int]
+        :rtype: List[int]
+        """
+        carry=0
+        size=len(digits)
+        for i in reversed(range(size)):
+            if i==size-1:
+                digits[i]+=1
+            digits[i]+=carry
+            carry=0
+            if digits[i]>9:
+                carry+=1
+                digits[i]=0
+        if carry:
+            digits=[1]+digits
+        return digits
+                
