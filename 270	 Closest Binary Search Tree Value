@@ -1,0 +1,35 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+
+    def __init__(self):
+        self.res = sys.maxint
+
+    def closestValue(self, root, target):
+        """
+        :type root: TreeNode
+        :type target: float
+        :rtype: int
+        """
+
+        if abs(root.val - target) < abs(self.res - target):
+            self.res = root.val
+
+        if root.val > target:
+            if (root.left and abs(root.left.val - target) > abs(root.val - target)) or not root.left:
+                self.res = min(self.res, root.val, key=lambda x:abs(x-target))
+            if root.left:
+                self.closestValue(root.left, target)
+
+        elif root.val < target:
+            if (root.right and abs(root.right.val - target) > abs(root.val - target)) or not root.right:
+                self.res = min(self.res, root.val, key=lambda x:abs(x-target))
+            if root.right:
+                self.closestValue(root.right, target)
+
+        return self.res
