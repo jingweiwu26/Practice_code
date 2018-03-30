@@ -1,0 +1,11 @@
+class Solution(object):
+    def canPermutePalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        dic = collections.defaultdict(int)
+        for i in s:
+            dic[i] +=1 
+        dic = {key:value for key, value in dic.items() if value%2!=0}
+        return True if len(dic) < 2 else False
