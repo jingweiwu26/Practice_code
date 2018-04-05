@@ -1,0 +1,10 @@
+class Solution(object):
+    def findComplement(self, num):
+        """
+        :type num: int
+        :rtype: int
+        """
+        _num = '{:b}'.format(num)
+        _    = int('1' * len(_num),2)
+        return _^num
+                
