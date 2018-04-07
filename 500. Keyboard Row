@@ -1,0 +1,20 @@
+class Solution(object):
+    def findWords(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[str]
+        """
+        dic = {
+        'r1' : {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'},
+        'r2' : {'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'},
+        'r3' : {'z', 'x', 'c', 'v', 'b', 'n', 'm'}}
+        rst = []
+        for word in words:
+            if len({self.return_key(dic, s) for s in word}) == 1:
+                rst.append(word)
+        return rst
+    
+    def return_key(self, dic, string):
+        for key, value in dic.items():
+            if string.lower() in value:
+                return key
