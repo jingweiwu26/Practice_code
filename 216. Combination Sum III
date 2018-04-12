@@ -1,0 +1,11 @@
+class Solution(object):
+    def combinationSum3(self, k, n):
+        """
+        :type k: int
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        from itertools import combinations
+        comb = combinations(xrange(1,10), k)
+        res = [list(t) for t in comb if sum(t) == n]
+        return res
