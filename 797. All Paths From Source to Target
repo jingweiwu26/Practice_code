@@ -1,0 +1,16 @@
+class Solution(object):
+    def allPathsSourceTarget(self, graph):
+        """
+        :type graph: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        res = []
+        self.helper(graph, res, 0, [0])
+        return res
+
+    def helper(self, graph, res, pos, path):
+        if pos == len(graph)-1:
+            res.append(path)
+
+        for n in graph[pos]:
+            self.helper(graph, res, n, path+[n])
