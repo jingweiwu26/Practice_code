@@ -1,0 +1,14 @@
+class Solution(object):
+    def findLongestChain(self, pairs):
+        """
+        :type pairs: List[List[int]]
+        :rtype: int
+        """
+        pairs = sorted(pairs, key = lambda x: x[1])
+        cnt = 0
+        current = -sys.maxint
+        for x,y in pairs:
+            if current < x:
+                cnt+=1
+                current = y
+        return cnt
