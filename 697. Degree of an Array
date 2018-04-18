@@ -1,0 +1,19 @@
+class Solution(object):
+    def findShortestSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        dic = collections.defaultdict(int)
+        for i in nums:
+            dic[i]+=1
+        max_freq=max(dic.values())
+        max_len = {}
+        for i in dic:
+            if dic[i]!=max_freq:
+                continue
+            start = nums.index(i)
+            end = len(nums)-(list(reversed(nums)).index(i)+1)
+            length = end-start+1
+            max_len[i] = length
+        return min(max_len.values())
