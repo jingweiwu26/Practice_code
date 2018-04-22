@@ -1,0 +1,21 @@
+class Solution(object):
+    def nextGreaterElement(self, findNums, nums):
+        """
+        :type findNums: List[int]
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        res = []
+        size = len(nums)
+        for num in findNums:
+            j = nums.index(num) + 1
+            found = False
+            while j < size and not found:
+                if nums[j] > num:
+                    found = True
+                    res.append(nums[j])
+                j+=1
+            if not found:
+                res.append(-1)
+        return res                
+                
