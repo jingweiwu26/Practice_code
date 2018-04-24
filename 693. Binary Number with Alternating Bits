@@ -1,0 +1,19 @@
+class Solution(object):
+    def hasAlternatingBits(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        n = '{:b}'.format(n)
+        for i in range(len(n)-1):
+            if int(n[i])+int(n[i+1])!=1:
+                return False
+        return True
+
+class Solution(object):
+    def hasAlternatingBits(self, n):
+        last = n & 1
+        while n!=0 and n & 1 == last:
+            last = 1 - last
+            n>>=1
+        return n==0
