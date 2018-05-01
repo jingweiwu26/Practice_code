@@ -1,0 +1,20 @@
+class Solution(object):
+    def rotateString(self, A, B):
+        """
+        :type A: str
+        :type B: str
+        :rtype: bool
+        """
+        if A == B:
+            return True
+        from collections import deque
+        A = deque(list(A))
+        B = deque(list(B))
+        size = len(A)
+        i = 0
+        while i <size:
+            A.rotate(1)
+            if A == B:
+                return True
+            i+=1
+        return False
