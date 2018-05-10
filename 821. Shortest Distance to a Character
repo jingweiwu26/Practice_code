@@ -1,0 +1,18 @@
+class Solution(object):
+    def shortestToChar(self, S, C):
+        """
+        :type S: str
+        :type C: str
+        :rtype: List[int]
+        """
+        c_idx_list = []
+        for idx, cha in enumerate(S):
+            if cha == C:
+                c_idx_list.append(idx)
+        
+        res= []
+        for idx, cha in enumerate(S):
+            dis = min([abs(idx - d) for d in c_idx_list])
+            res.append(dis)
+        
+        return res
