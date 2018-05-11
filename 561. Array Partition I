@@ -1,0 +1,13 @@
+class Solution(object):
+    def arrayPairSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        res = []
+        nums = sorted(nums)
+        i = 0
+        while i < len(nums):
+            res.append(min(nums[i], nums[i+1]))
+            i+=2
+        return sum(res)
