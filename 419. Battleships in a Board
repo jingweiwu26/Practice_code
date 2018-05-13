@@ -1,0 +1,24 @@
+class Solution(object):
+    def countBattleships(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: int
+        """
+        self.n_rows = len(board)
+        self.n_cols = len(board[0])
+        count = 0
+        for i in range(self.n_rows):
+            for j in range(self.n_cols):
+                if board[i][j] == 'X':
+                    count+=1
+                    self.sink_ship(board, i, j)
+        return count
+        
+    def sink_ship(self, board, row_idx, col_idx):
+        board[row_idx][col_idx] = '.'
+        if col_idx+1 < self.n_cols and board[row_idx][col_idx+1] == 'X':
+            self.sink_ship(board, row_idx, col_idx+1)
+        if row_idx+1 < self.n_rows and board[row_idx+1][col_idx] == 'X':
+            self.sink_ship(board, row_idx+1, col_idx)
+        return board
+        
