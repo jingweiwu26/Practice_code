@@ -1,0 +1,14 @@
+class Solution(object):
+    def maxIncreaseKeepingSkyline(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+        """
+        count = 0
+        size = len(grid)
+        max_row = [max(row) for row in grid]
+        max_col = [max(i) for i in zip(*[row for row in grid])]
+        for i in range(size):
+            for j in range(size):
+                count += min(max_row[i], max_col[j]) - grid[i][j]
+        return count
