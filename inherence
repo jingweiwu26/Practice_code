@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue May 15 21:50:49 2018
+
+@author: Wu Jingwei
+"""
+
+class A(object):
+    def say(self):
+        return 'A'
+
+class B(A):
+    def talk(self):
+        return self.say()
+
+class C(B):
+    def say(self):
+        return 'C'
+    
+    def res(self):
+        return super(C, self).talk()
+
+print C().res() #C
