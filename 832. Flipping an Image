@@ -1,0 +1,9 @@
+    def flipAndInvertImage(self, A):
+        """
+        :type A: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        A = [row[::-1] for row in A]
+        A = [map(lambda x: 1 if not x else 0, row) for row in A]
+        return A
+    
