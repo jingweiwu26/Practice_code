@@ -1,0 +1,15 @@
+class Solution(object):
+    def customSortString(self, S, T):
+        """
+        :type S: str
+        :type T: str
+        :rtype: str
+        """
+        def _sort(c):
+            if c not in S:
+                return -1
+            return S.index(c)
+
+        T = sorted(T, key=_sort)
+        return "".join(T)
+    
