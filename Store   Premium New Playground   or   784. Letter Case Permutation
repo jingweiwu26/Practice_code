@@ -1,0 +1,18 @@
+class Solution(object):
+    def letterCasePermutation(self, S):
+        """
+        :type S: str
+        :rtype: List[str]
+        """
+        has_str = False
+        res = [S.lower()]
+        for idx, c in enumerate(res[0]):
+            if not c.isdigit():
+                has_str = True
+                temp = res
+                temp = [list(word) for word in temp]
+                for word in temp:
+                    word[idx] = word[idx].upper()
+                temp = ["".join(word) for word in temp]
+                res.extend(temp)
+        return res if has_str else [S] 
