@@ -1,0 +1,29 @@
+class Solution(object):
+    def maxAreaOfIsland(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+        """
+        self.max_area = 0
+        self.cnt = 0
+        self.n_row = len(grid)
+        self.n_col = len(grid[0])
+        for r in range(self.n_row):
+            for c in range(self.n_col):
+                if grid[r][c] == 1:
+                    self.sink(grid, r, c, self.cnt)
+                    self.max_area = max(self.max_area, self.cnt)
+                    self.cnt = 0
+        return self.max_area
+
+    def sink(self, grid, r, c, cnt):
+        self.cnt+=1
+        grid[r][c]=0
+        if r+1 < self.n_row and grid[r+1][c] == 1:
+            self.sink(grid, r+1, c, cnt)
+        if c+1 < self.n_col and grid[r][c+1] == 1:
+            self.sink(grid, r, c+1, cnt)
+        if r-1 >= 0 and grid[r-1][c] == 1:
+            self.sink(grid, r-1, c, cnt)
+        if c-1 >= 0 and grid[r][c-1] == 1:
+            self.sink(grid, r, c-1, cnt)
