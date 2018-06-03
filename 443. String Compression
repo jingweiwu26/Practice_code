@@ -1,0 +1,21 @@
+class Solution(object):
+    def compress(self, chars):
+        """
+        :type chars: List[str]
+        :rtype: int
+        """
+        idx = 0
+        pointer = 0
+        while idx < len(chars):
+            c = 0
+            new_c = chars[idx]
+            while idx < len(chars) and chars[idx] == new_c:
+                c += 1
+                idx += 1
+            chars[pointer] = new_c
+            pointer += 1
+            if c > 1:
+                for i in str(c):
+                    chars[pointer] = i
+                    pointer += 1
+        return pointer
