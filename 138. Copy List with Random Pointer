@@ -1,0 +1,29 @@
+# Definition for singly-linked list with a random pointer.
+# class RandomListNode(object):
+#     def __init__(self, x):
+#         self.label = x
+#         self.next = None
+#         self.random = None
+
+class Solution(object):
+    def copyRandomList(self, head):
+        """
+        :type head: RandomListNode
+        :rtype: RandomListNode
+        """
+        if not head:
+            return None
+        dic = {}
+        current = head
+        while current:
+            dic[current] = RandomListNode(current.label)
+            current = current.next
+        dic[None] = None
+        
+        current = head
+        while current:
+            dic[current].next = dic[current.next]
+            dic[current].random = dic[current.random]
+            current = current.next
+        
+        return dic[head]
