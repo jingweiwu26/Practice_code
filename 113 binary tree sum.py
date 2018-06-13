@@ -26,3 +26,36 @@ class Solution(object):
         else:
             sub_sum=sum-root.val            
             return self.hasPathSum(root.left, sub_sum) or self.hasPathSum(root.right, sub_sum)
+        
+ # Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def pathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: List[List[int]]
+        """
+        if not root:
+            return []
+        res = []
+        path = [root.val]
+        self.helper(root, sum, res, path)
+        return res
+    
+    def helper(self, node, sum, res, path):
+        if not node:
+            return
+        sum -= node.val
+        if sum == 0 and not node.left and not node.right:
+            res.append(path)
+        else:
+            if node.left:
+                self.helper(node.left, sum, res, path+[node.left.val])
+            if node.right:
+                self.helper(node.right, sum, res, path+[node.right.val])
