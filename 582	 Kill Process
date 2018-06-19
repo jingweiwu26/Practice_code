@@ -1,0 +1,29 @@
+class Solution(object):
+    def killProcess(self, pid, ppid, kill):
+        """
+        :type pid: List[int]
+        :type ppid: List[int]
+        :type kill: int
+        :rtype: List[int]
+        """
+        if kill not in pid:
+            return []
+
+        res = []
+        dic = {}
+        for p, pp in zip(pid, ppid):
+            if pp not in dic:
+                dic[pp] = []
+            dic[pp].append(p)
+
+        current = [kill]
+        res.append(kill)
+
+        while current:
+            next = []
+            for n in current:
+                if n in dic:
+                    next += dic[n]
+            current = next
+            res += next
+        return res
