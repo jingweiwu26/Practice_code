@@ -23,3 +23,15 @@ class Solution(object):
                 current = next
         res.append(current)
         return res
+
+
+
+    def merge(self, intervals):
+        res = []
+        intervals = sorted(intervals, key=lambda x:x.start)
+        for i in intervals:
+            if res and i.start <= res[-1].end:
+                res[-1].end = max(i.end,res[-1].end)
+            else:
+                res.append(i)
+        return res
