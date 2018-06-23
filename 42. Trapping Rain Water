@@ -1,0 +1,24 @@
+class Solution(object):
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        size = len(height)
+        left = [0] * size
+        right = [0] * size
+        current_max = 0
+        for i in range(size):
+            current_max = max(current_max, height[i])
+            left[i] = current_max
+        
+        current_max = 0
+        for i in reversed(range(size)):
+            current_max = max(current_max, height[i])
+            right[i] = current_max
+        
+        sum = 0
+        for i,j,k in zip(left,right,height):
+            if k< min(i,j):
+                sum+=min(i,j)-k
+        return sum
