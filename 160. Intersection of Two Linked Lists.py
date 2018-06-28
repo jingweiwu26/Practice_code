@@ -30,3 +30,28 @@ class Solution(object):
                 return cur_b
             cur_b=cur_b.next
         return None
+    
+    
+    # Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+        dic = {}
+        cur = headA
+        while cur:
+            dic[id(cur)] = cur.val
+            cur = cur.next
+        cur = headB
+        while cur:
+            if id(cur) in dic:
+                return cur
+            cur = cur.next
+        return 
