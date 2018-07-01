@@ -1,0 +1,42 @@
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        longest = 0
+        substring_map = {}
+        start = 0
+        for i in range(len(s)):
+            position = substring_map.get(s[i])
+            if position is not None and position >= start:
+                length = i - start
+                start = position + 1
+                longest = max(length, longest)
+            substring_map[s[i]] = i
+        longest = max(len(s) - start, longest)
+        return longest
+
+    def lengthOfLongestSubstring(self, s):
+        lastRepeating = -1
+        longestSubstring = 0
+        positions = {}
+        for i in range(len(s)):
+            if s[i] in positions and lastRepeating<positions[s[i]]:
+                lastRepeating = positions[s[i]]
+            if i-lastRepeating > longestSubstring:
+                longestSubstring = i-lastRepeating
+            positions[s[i]]=i
+        return longestSubstring
+    
+    def lengthOfLongestSubstring(self, s):
+        dic = {}
+        size = len(s)
+        m = 0
+        last = -1
+        for i in range(size):
+            if s[i] in dic and last < dic[s[i]]:
+                last = dic[s[i]]
+            dic[s[i]] = i
+            m = max(i-last, m)
+        return m
