@@ -1,0 +1,25 @@
+class Solution(object):
+    def findAnagrams(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: List[int]
+        """
+        res = []
+        len_s = len(s)
+        len_p = len(p)
+        counter = len_p
+        dic = collections.Counter(p)
+        for i in range(len_s):
+            if dic[s[i]] >= 1:
+                counter -= 1
+            dic[s[i]] -= 1
+            
+            if i >= len_p:
+                if dic[s[i-len_p]] >= 0:
+                    counter += 1
+                dic[s[i-len_p]] += 1
+            
+            if counter == 0:
+                res.append(i - len_p + 1)
+        return res
