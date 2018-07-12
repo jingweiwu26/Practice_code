@@ -1,0 +1,27 @@
+class Solution(object):
+    def ladderLength(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: int
+        """
+        if endWord not in wordList:
+            return 0
+        size = len(beginWord)
+        
+        current = [(beginWord, 1)]
+        while current:
+            word, count = current.pop(0)
+            if word == endWord:
+                return count
+            for i in range(size):
+                l = word[:i]
+                r = word[i+1:]
+                for c in 'abcdefghijklmnopqrstuvwxyz':
+                    if c!=word[i]:
+                        new_word = l + c + r
+                        if new_word in wordList:
+                            current.append((new_word, count+1))
+                            wordList.remove(new_word)
+        return 0
