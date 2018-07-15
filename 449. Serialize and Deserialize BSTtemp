@@ -50,3 +50,47 @@ class Codec:
         root.left = self.l_to_t(lis[:length/2])
         root.right = self.l_to_t(lis[length/2+1:])
         return root
+        
+    
+    # Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Codec:
+    
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        rec = self.tra(root)
+        rec = json.dumps(rec)
+        print rec
+        return rec
+    
+    def deserialize(self, data):
+        import json
+        vals = collections.deque(json.loads(data))
+        def build(minVal, maxVal):
+            if vals and minVal < vals[0] < maxVal:
+                val = vals.popleft()
+                root = TreeNode(val)
+                root.left = build(minVal, val)
+                root.right = build(val, maxVal)
+                return root
+        return build(float('-inf'), float('inf'))
+        
+    def tra(self, node):
+        if not node:
+            return []
+        l = list()
+        l.append(node.val)
+        if node.left:
+            l += self.tra(node.left)
+        if node.right:
+            l += self.tra(node.right)
+        return l
