@@ -1,0 +1,38 @@
+class Solution(object):
+    def calPoints(self, ops):
+        """
+        :type ops: List[str]
+        :rtype: int
+        """
+        for idx, number in enumerate(ops):
+            if number == 'C':
+                count = 0
+                i = idx
+                while count < 1:
+                    if ops[i-1] != 'C':
+                        count +=1 
+                        ops[i-1] = 'C'
+                    i -=1
+                
+            if number == '+':
+                count = 0
+                s = 0
+                i = idx
+                while count < 2:
+                    if ops[i-1] != 'C':
+                        count+=1
+                        s +=int(ops[i-1])
+                    i-=1
+                ops[idx] = str(s)
+        
+            if number == 'D':
+                count = 0
+                i = idx
+                while count < 1:
+                    if ops[i-1] != 'C':
+                        ops[idx] = str(2 * int(ops[i-1]))
+                        count+=1
+                    i-=1
+        print ops
+        return sum(int(n) for n in ops if n != 'C')
+                    
