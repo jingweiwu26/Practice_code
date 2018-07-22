@@ -1,0 +1,50 @@
+class Solution(object):
+    DIRECTION = 0
+    def explore(self, m, ri, ci, lis):
+
+        # first check if this cell is already explored, if it is -1 (explored), do nothing
+        if m[ri][ci] == 'E':
+            return
+    
+        # Direction will change when next cell is out of boarder or it has already been explored
+        if   ((self.DIRECTION == 0 and ci+1 == len(m[0]))
+           or (self.DIRECTION == 1 and ri+1 == len(m))
+           or (self.DIRECTION == 2 and ci-1 == 'E')
+           or (self.DIRECTION == 3 and ri-1 == 'E')
+           or (self.DIRECTION == 0 and m[ri][ci+1] and m[ri][ci+1] == 'E')
+           or (self.DIRECTION == 1 and m[ri+1][ci] and m[ri+1][ci] == 'E')
+           or (self.DIRECTION == 2 and m[ri][ci-1] and m[ri][ci-1] == 'E')
+           or  (self.DIRECTION == 3 and m[ri-1][ci] and m[ri-1][ci] == 'E')):
+            self.DIRECTION = (self.DIRECTION + 1) % 4 # Changes to next direction, 0 == right, 1 == down, 2 == left, 3 == up
+        
+        # so long as this cell has not been explored, append it to the result list and mark this cell as explored
+        lis.append(m[ri][ci])    
+        m[ri][ci] = 'E'
+        
+        # explore one cell right to current cell, so long as it is not reaching the boarder of the matrix
+        # the explore func will explore the next right cell and add it to result list
+        if self.DIRECTION == 0:
+            self.explore(m, ri, ci+1, lis)
+        # after it cannot go to right any more, it starts to go below
+        if self.DIRECTION == 1:
+            self.explore(m, ri+1, ci, lis)
+        # to left
+        if self.DIRECTION == 2:
+            self.explore(m, ri, ci-1, lis)
+        # to up
+        if self.DIRECTION == 3:
+            self.explore(m, ri-1, ci, lis)
+            
+    def spiralOrder(self, m):
+        if len(m) == 1:
+            return m[0]
+        
+        lis = []
+        # if this is an empty matrix, return an empty list
+        if not m:
+            return lis
+    
+        # otherwise, call the explore function, starting from 0,0 index
+        # by calling explore, it will update the lis (the result list)
+        self.explore(m, 0, 0, lis)
+        return lis
