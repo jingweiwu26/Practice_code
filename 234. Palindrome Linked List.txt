@@ -22,3 +22,28 @@ class Solution(object):
             if deq.popleft()!=deq.pop():
                 return False
         return True
+
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def isPalindrome(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        lst = []
+        current = head
+        while current:
+            lst.append(current.val)
+            current = current.next
+        
+        while len(lst) >1:
+            if lst.pop() != lst.pop(0):
+                return False
+        
+        return True
