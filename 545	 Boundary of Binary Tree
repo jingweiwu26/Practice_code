@@ -1,0 +1,61 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def boundaryOfBinaryTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        if not root:
+            return []
+        if not root.left and not root.right: return [root.val]
+        leaves = []
+        def tra(node):
+            if not node:
+                return
+            if not node.left and not node.right:
+                leaves.append(node)
+            if node.left:
+                tra(node.left)
+            if node.right:
+                tra(node.right)
+        tra(root)
+        
+        left = []
+        current = root
+        while current and current != leaves[0]:
+            left.append(current)
+            if current.left:
+                current = current.left
+            else:
+                current = current.right
+        
+        right = []
+        current = root
+        while current and current != leaves[-1]:
+            right.append(current)
+            if current.right:
+                current = current.right
+            else:
+                current = current.left
+                
+        if not root.left:
+            left = []
+        else:
+            left = left[1:]
+        
+        if not root.right:
+            right = []
+        else:
+            right = right[1:]
+    
+        print [n.val for n in left]
+        print [n.val for n in right]
+        print [n.val for n in leaves]
+        res = [root] + left + leaves + right[::-1]
+        return [n.val for n in res]
