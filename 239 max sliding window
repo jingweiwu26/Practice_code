@@ -12,3 +12,18 @@ class Solution(object):
             dq.append(i)
             res.append(max(dq))
         return res[k-1:]
+class Solution(object):
+    def maxSlidingWindow(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        if not nums:
+            return []
+        starts = xrange(len(nums)-k+1)
+        ends = xrange(k-1, len(nums))
+        res = []
+        for s,e in zip(starts,ends):
+            res.append(max(nums[s:e+1]))
+        return res
