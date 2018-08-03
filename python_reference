@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Aug 03 14:13:46 2018
+
+@author: Wu Jingwei
+"""
+
+a = [1,2,3]
+b = a
+def foo(a,b):
+    a = a[:2]    # a is a new variable under this dunction this is [1,2], b = [1,2,3,4]
+    b = b + [4]
+    print a, b 
+
+foo(a,b) #[1, 2] [1, 2, 3, 4]
+print a,b # [1,2,3] [1,2,3]
+
+
+a = [1,2,3]
+b = a
+def foo(a,b):
+    a[:] = a[:2]    # a is in place here, so a becomes [1,2], b becomes[1,2]
+    b = b + [4] # b is a new object, so b in the function is b[1,2,4] b outside is [1,2]
+    print a, b 
+
+foo(a,b)  # [1,2] [1,2,4]
+print a,b  # [1,2], [1,2]
+
+
+a = [1,2,3]
+b = a
+def foo(a,b):
+    a+=[4]    # a is in place here, so a becomes [1,2,3,4 ], b becomes[1,2,3, 4]
+    b = b + [4] # b is a new object, so b in the function is b[1,2,3,4, 4] b outside is [1,2,3, 4]
+    print a, b 
+
+foo(a,b)  # [1,2,3 4] [1,2,3,4,4]
+print a,b  # [1,2,3, 4], [1,2,3, 4]
