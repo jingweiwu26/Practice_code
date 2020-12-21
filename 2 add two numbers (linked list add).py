@@ -73,3 +73,24 @@ class Solution(object):
         if carry:
             cur.next = ListNode(carry)
         return head.next
+    
+    class Solution:
+        def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+            head = ListNode(0)
+            carry = 0
+            cursor = head
+
+            while l1 or l2 or carry:
+                val = (l1.val if l1 is not None else 0) + (l2.val if l2 is not None else 0) + carry
+                carry = 0
+                if val >= 10:
+                    val = val % 10
+                    carry = 1
+                node = ListNode(val)
+                head.next = node
+                if l1 is not None:
+                    l1 = l1.next
+                if l2 is not None:
+                    l2 = l2.next
+                head = head.next
+            return cursor.next
