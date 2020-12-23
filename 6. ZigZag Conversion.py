@@ -32,3 +32,25 @@ class Solution(object):
                 res *= -1
             sign += res
             yield res
+
+            
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+
+    if numRows == 1:
+        return s
+
+    res = ['' for i in range(numRows)]
+    gen = self.gen(numRows)
+    next_row = 0
+    for i in range(len(s)):
+        res[next_row] = res[next_row] + s[i]
+        next_row = next_row + next(gen)
+    return "".join(res)
+
+    def gen(self, numRows):
+        while True:
+            for _ in range(numRows-1):
+                yield 1
+            for _ in range(numRows-1):
+                yield -1
