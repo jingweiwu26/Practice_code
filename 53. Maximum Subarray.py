@@ -23,3 +23,15 @@ class Solution(object):
             res=max(current_max, res)
             print current_max, res
         return res
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int: # Greedy
+        if max(nums)<0:
+            return max(nums)
+        curr_sum = 0
+        max_sum = 0
+        for num in nums:
+            curr_sum = max(num, curr_sum + num)
+            max_sum = max(curr_sum, max_sum)
+            print(num, curr_sum,max_sum)
+        return max_sum
