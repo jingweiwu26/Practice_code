@@ -1,0 +1,13 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:
+            return ''
+        
+        cp = ''
+        shortest = min(strs, key=len)
+        for idx, s in enumerate(shortest):
+            if all([c[idx] == s for c in strs]):
+                cp += s
+            else:
+                break
+        return cp
