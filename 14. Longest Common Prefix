@@ -11,3 +11,17 @@ class Solution:
             else:
                 break
         return cp
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:
+            return ''
+        
+        cp = ''
+        groups = zip(*strs)
+        for g in groups:
+            if len(set(g)) == 1:
+                cp+= g[0]
+            else:
+                break
+        return cp
