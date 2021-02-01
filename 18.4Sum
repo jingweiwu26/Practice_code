@@ -1,0 +1,32 @@
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        
+        def two_sum(nums, target):
+            res = []
+            lo = 0
+            hi = len(nums) - 1
+            while lo < hi:
+                val = nums[lo] + nums[hi]
+                if val == target:
+                    res.append([nums[hi], nums[lo]])
+                    lo += 1
+                elif val > target:
+                    hi -= 1
+                else:
+                    lo += 1
+            return res
+        
+        def ksum(nums, target, k):
+            res = []
+       
+            if k == 2:
+                return two_sum(nums, target)
+            else:
+                for i in range(len(nums)):
+                    for j in ksum(nums[i+1:], target-nums[i], k-1):
+                        if [nums[i]] + j not in res:
+                            res.append([nums[i]] + j)
+            return res
+        
+        nums = sorted(nums)
+        return ksum(nums, target, 4)
