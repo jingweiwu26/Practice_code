@@ -33,3 +33,17 @@ class Solution(object):
             prev_node = cur_list[-n-1]
             prev_node.next=prev_node.next.next
         return head
+
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        lis = []
+        res = head
+        while head:
+            lis.append(head)
+            head = head.next
+        target = lis[-n]
+        if res == target:
+            res = res.next
+        else:
+            lis[-n-1].next = lis[-n-1].next.next
+        return res
