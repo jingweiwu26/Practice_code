@@ -41,3 +41,26 @@ class Solution(object):
         if not stack:
             return True   
         return False
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        m = {'(':')',
+             '[':']',
+             '{':'}'}
+        
+        stk = []
+        for c in s:
+            if c in m:
+                stk.append(m[c])
+            else:
+                if not stk:
+                    return False
+                else:
+                    v = stk.pop()
+                    if c != v:
+                        return False
+        if stk:
+            return False
+
+        return True
+        
