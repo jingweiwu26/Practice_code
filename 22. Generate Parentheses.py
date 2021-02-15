@@ -32,3 +32,19 @@ class Solution(object):
                 except:
                     return False
         return True
+    
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res = []
+        def gen(o, c, s):
+            if o > c:
+                return
+            if o == c == 0:
+               res.append(s)
+            if o == 0:
+                gen(0, c-1, s+')')
+            else:
+                gen(o-1, c, s+'(')
+                gen(o, c-1, s+')')
+        gen(n, n, '')
+        return res
