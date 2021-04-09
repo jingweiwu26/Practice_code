@@ -1,0 +1,22 @@
+class Solution:
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        a = self.binary_seach(nums, target)
+        b = self.binary_seach(nums, target+1) 
+        if a == b:
+            return [-1, -1]
+        return [a, b - 1]
+    
+    def binary_seach(self, nums, target):
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] >= target:
+                right = mid - 1
+            else:
+                left = mid + 1
+        return left 
