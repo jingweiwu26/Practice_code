@@ -1,0 +1,23 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+
+        for row in board:
+            if not self.valid9(row):
+                return False
+            
+        for col in zip(*board):
+            print(col)
+            if not self.valid9(col):
+                return False
+
+        for i in (0,3,6):
+            for j in (0,3,6):
+                square = [board[x][y] for x in range(i, i + 3) for y in range(j, j + 3)]
+                if not self.valid9(square):
+                    return False
+        return True
+        
+                   
+    def valid9(self, lis):
+        lis = list(filter(lambda x: x!= '.', lis))
+        return len(lis) == len(set(lis))
