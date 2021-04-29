@@ -28,3 +28,13 @@ class Solution(object):
                 _path.pop()
             cur += 1
 
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        dp = [[] for i in range(target+1)]
+        dp[0] = [[]]
+        for c in candidates:
+            for i in range(target + 1):
+                if i >= c:
+                    for ans in dp[i-c]:
+                        dp[i].append(ans+[c])
+        return dp[-1]
