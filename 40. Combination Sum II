@@ -15,3 +15,24 @@ class Solution:
                 self.dfs(candidates, target - candidates[current], current+1, ans, path)
                 last=path.pop()
             current += 1
+
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        dp = [set() for i in range(target + 1)]
+        dp[0].add(())
+        candidates = sorted(candidates)
+        for c in candidates: #1,2
+            for i in reversed(range(len(dp))): #0,1,2 |2,1,0
+                if c <= i: # 1+1: dp[1] = dp[0] +1 , 
+                           # 1+2: dp[2] = dp[1] +1,
+                           # 2+1: dp[2] = dp[1] +2  | 
+                           # |
+                           # 1+2: dp[1] = dp[1] +1 -> dp[1] = [1]
+                           # 1+1: dp[1] = dp[0] +1 -> dp[1] = [1+1]
+                           # 2+2: dp[2] = dp[1] +2
+                    for temp_ans in dp[i-c]:
+                        dp[i].add(temp_ans + (c,))
+        return dp[-1]
+    
+#1 use element multiple times
+#2 same result multiple times
