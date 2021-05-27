@@ -1,0 +1,23 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        if num1 == '0' or num2 =='0':
+            return '0'
+        
+        num1 = num1[::-1]
+        num2 = num2[::-1]
+        arr = [0 for i in range(len(num1) + len(num2))]
+        for idx_m, m in enumerate(num1):
+            for idx_n, n in enumerate(num2):
+                temp = int(m) * int(n)
+                arr[idx_m + idx_n] += temp % 10
+                arr[idx_m + idx_n + 1] += temp // 10
+
+        for idx in range(len(arr)):
+            if arr[idx] >= 10:
+                arr[idx +1] += arr[idx] // 10
+                arr[idx] = arr[idx] % 10
+        arr = arr[::-1]
+        res = "".join([str(i) for i in arr])
+        res = res.lstrip('0')
+        return res
+                
