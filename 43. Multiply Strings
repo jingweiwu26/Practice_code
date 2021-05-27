@@ -21,3 +21,22 @@ class Solution:
         res = res.lstrip('0')
         return res
                 
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        if num1 == '0' or num2 =='0':
+            return '0'
+        
+        num1 = num1[::-1]
+        num2 = num2[::-1]
+        arr = [0 for i in range(len(num1) + len(num2))]
+        for m in range(len(num1)):
+            for n in range(len(num2)):
+                temp = int(num1[m]) * int(num2[n])
+                _sum = temp + arr[m + n]
+                arr[m + n] = _sum % 10
+                arr[m + n + 1] += _sum // 10
+
+        arr = arr[::-1]
+        res = "".join([str(i) for i in arr])
+        res = res.lstrip('0')
+        return res
