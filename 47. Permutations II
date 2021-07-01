@@ -1,0 +1,22 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        
+        used = [0] * len(nums)
+        res = []
+        nums = sorted(nums)
+
+        def back(path, select, used):
+            if len(path) == len(nums):
+                res.append(path[:])
+
+            for i in range(len(nums)):
+                if not used[i]:
+                    if i > 0 and nums[i] == nums[i-1] and not used[i-1]:
+                        continue
+                    used[i] = 1
+                    path.append(nums[i])
+                    back(path, nums, used)
+                    path.pop()
+                    used[i] = 0
+        back([], nums, used)
+        return res
