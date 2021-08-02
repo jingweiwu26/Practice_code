@@ -21,3 +21,17 @@ class Solution(object):
         for key, value in dic.iteritems():
             res.append(value)
         return res
+    
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        dic = {}
+        for i in strs:
+            if "".join(sorted(i)) not in dic:
+                dic["".join(sorted(i))] = []
+            dic["".join(sorted(i))].append(i)
+        
+        res = []
+        for i in dic:
+            res.append(dic[i])
+            
+        return res
