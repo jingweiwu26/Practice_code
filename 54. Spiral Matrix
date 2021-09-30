@@ -48,3 +48,32 @@ class Solution(object):
         # by calling explore, it will update the lis (the result list)
         self.explore(m, 0, 0, lis)
         return lis
+
+
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        t,l = 0, 0
+        r,d = len(matrix[0]) - 1, len(matrix) - 1
+        res = []
+        while True:
+            for i in range(l, r + 1):
+                res.append(matrix[t][i])
+            t += 1
+            if t > d: break
+            
+            for i in range(t, d + 1):
+                res.append(matrix[i][r])
+            r -= 1
+            if l > r: break
+            
+            for i in range(r, l - 1, -1):
+                res.append(matrix[d][i])
+            d -= 1
+            if t > d: break
+            
+            for i in range(d, t - 1, -1):
+                res.append(matrix[i][l])
+            l += 1
+            if l > r: break
+
+        return res
