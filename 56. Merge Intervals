@@ -24,7 +24,18 @@ class Solution(object):
         res.append(current)
         return res
 
-
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals = sorted(intervals,key=lambda lis:lis[0])
+        res = [intervals[0]]
+        for r in range(1, len(intervals)):
+            last = res[-1]
+            if last[1] >= intervals[r][0]:
+                lis = [last[0], max(last[1], intervals[r][1])]
+                res[-1] = lis
+            else:
+                res.append(intervals[r])
+        return res
 
     def merge(self, intervals):
         res = []
