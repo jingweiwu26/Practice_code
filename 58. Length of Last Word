@@ -7,3 +7,15 @@ class Solution(object):
         if not s.split():
             return 0
         return len(s.split()[-1])
+
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        res = 0
+        for i in s[::-1]:
+            if i == ' ' and not res:
+                continue
+            elif i == ' ' and res:
+                break
+            else:
+                res +=1
+        return res
