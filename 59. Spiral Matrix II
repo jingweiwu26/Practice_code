@@ -1,0 +1,25 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        t, l = 0, 0
+        r, d, = n -1, n-1
+        res = [[-1] * n for i in range(n)]
+        gen = iter(range(1, 4000))
+        while True:
+            for i in range(l , r + 1):
+                res[t][i] = next(gen)
+            t += 1
+            
+            for i in range(t,  d + 1):
+                res[i][r] = next(gen)
+            r -=1
+            
+            for i in range(r, l - 1, -1):
+                res[d][i] = next(gen)
+            d -=1
+            
+            for i in range(d, t - 1, -1):
+                res[i][l] = next(gen)
+            l +=1
+        
+            if l > r: break
+        return res
