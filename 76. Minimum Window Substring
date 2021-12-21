@@ -1,0 +1,33 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        
+        l, r = 0, 0
+        res = ' ' * 999999
+        dic = Counter(t)
+        
+        def has_all(st, dic):
+            dist = Counter(st)
+            for c in dic:
+                if c not in dist or dist[c] < dic[c]:
+                    return False
+            return True 
+        
+        if len(s) == 1:
+            return s if s == t else ''
+        
+        while r < len(s) -1:
+
+            while not has_all(s[l:r+1], dic) and r<len(s)-1:
+                r+=1
+            
+            while has_all(s[l:r+1], dic):
+                l+=1
+
+            if r == len(s)-1 and l == 0:
+                return ''
+             
+            _res = s[l-1: r+1]
+            if len(_res) < len(res):
+                res = _res
+
+        return res
