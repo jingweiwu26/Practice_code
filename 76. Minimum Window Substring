@@ -31,3 +31,38 @@ class Solution:
                 res = _res
 
         return res
+
+
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        
+        l, r = 0, 0
+        res = ''
+        dic = Counter(t)
+        pattern = {}
+        min_len = float('inf')
+        
+        def pattern_complete(pattern, dic):
+            for k in dic:
+                if k not in pattern or dic[k] > pattern[k]:
+                    return False
+            return True
+        
+        while r <= len(s) -1:
+            if s[r] in dic:
+                if s[r] not in pattern:
+                    pattern[s[r]] = 1
+                else:
+                    pattern[s[r]] += 1
+            
+            while pattern_complete(pattern, dic):
+                if s[l] in pattern:
+                    pattern[s[l]] -= 1
+                   
+                if r - l + 1 < min_len:
+                    res = s[l:r+1]
+                    min_len = r - l + 1
+
+                l += 1
+            r += 1
+        return res
