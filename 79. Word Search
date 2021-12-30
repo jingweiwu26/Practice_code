@@ -1,0 +1,22 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        row, col = len(board), len(board[0])
+
+        def back_tracking(x, y, word_idx):
+            if board[x][y] != word[word_idx]:
+                return False
+            if word_idx == len(word) - 1:
+                return True
+            
+            board[x][y] = '.'
+            for choice in [[0,1], [0, -1], [1,0], [-1,0]]:
+                nx, ny = x + choice[0], y + choice[1]
+                if 0<= nx < row  and 0<= ny < col and back_tracking(nx, ny, word_idx+1):
+                    return True
+            board[x][y] = word[word_idx]
+        
+        for i in range(row):
+            for j in range(col):
+                if back_tracking(i, j, 0):
+                    return True
+        return False
