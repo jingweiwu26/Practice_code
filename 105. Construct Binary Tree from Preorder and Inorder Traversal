@@ -20,3 +20,13 @@ class Solution(object):
         root.left = self.buildTree(preorder, inorder[:idx])
         root.right = self.buildTree(preorder, inorder[idx+1:])       
         return root
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        if not preorder or not inorder:
+            return
+        node = TreeNode(preorder[0])
+        l = inorder.index(node.val) # it is index of root, also length of left tree
+        node.left = self.buildTree(preorder[1: l+1], inorder[:l])
+        node.right = self.buildTree(preorder[l+1:], inorder[l+1:])
+        return node
