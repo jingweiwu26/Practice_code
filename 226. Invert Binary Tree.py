@@ -24,3 +24,11 @@ class Solution(object):
         self.invertTree(root.left)
         self.invertTree(root.right)
         return root
+    
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root:
+            return
+        node = root
+        node.left, node.right = self.invertTree(node.right), self.invertTree(node.left)
+        return node
