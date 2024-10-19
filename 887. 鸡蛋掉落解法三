@@ -1,0 +1,12 @@
+class Solution:
+    def superEggDrop(self, k: int, n: int) -> int:
+        #状态 K个蛋 投N次
+        #选择 蛋碎了 蛋没碎 看能测几层楼
+        dp=[[0] * (n+1) for _ in range(k+1)]
+        #设定边
+
+        for i in range(1,k+1):
+            for j in range(1,n+1):
+                dp[i][j] = dp[i-1][j-1] + dp[i][j-1] +1
+                if dp[k][j] >= n:
+                    return j
