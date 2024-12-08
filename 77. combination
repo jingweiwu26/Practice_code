@@ -16,3 +16,20 @@ class Solution:
         backtrack(1)
         return res
 
+#剪枝
+
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        path = []
+        res = []
+
+        def backtrack(idx):
+            if len(path) == k:
+                res.append(path[:])
+                return
+            for i in range(idx,n+2-(k-len(path))):
+                path.append(i)
+                backtrack(i+1)
+                path.pop()
+        backtrack(1)
+        return res
