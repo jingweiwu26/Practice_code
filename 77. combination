@@ -5,14 +5,14 @@ class Solution:
         path = []
         res = []
 
-        def backtrack(idx, to_pick):
+        def backtrack(idx):
             if len(path) == k:
                 res.append(path[:])
                 return
             for i in range(idx,n+1):
                 path.append(i)
-                backtrack(i+1, k-1)
+                backtrack(i+1)
                 path.pop()
-        backtrack(1,k)
+        backtrack(1)
         return res
 
