@@ -1,0 +1,18 @@
+# basic approach
+
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        path = []
+        res = []
+
+        def backtrack(idx, to_pick):
+            if len(path) == k:
+                res.append(path[:])
+                return
+            for i in range(idx,n+1):
+                path.append(i)
+                backtrack(i+1, k-1)
+                path.pop()
+        backtrack(1,k)
+        return res
+
