@@ -9,3 +9,28 @@ class Solution(object):
         comb = combinations(xrange(1,10), k)
         res = [list(t) for t in comb if sum(t) == n]
         return res
+
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        res = []
+
+
+        def traverse(val, t, temp,i):
+            
+            if val<0: #剪枝
+                return
+            
+            if val == 0 and t==0:
+                res.append(temp[:])
+                return 
+            
+            if t==0:
+                return
+            
+            for j in range(i,0,-1):
+                temp.append(j)
+                traverse(val-j, t-1, temp, j-1)
+                temp.pop()
+            
+        traverse(n, k, [], 9)
+        return res
