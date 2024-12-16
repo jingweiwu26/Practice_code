@@ -38,3 +38,24 @@ class Solution:
                     for ans in dp[i-c]:
                         dp[i].append(ans+[c])
         return dp[-1]
+
+#backtrack
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        candidates = sorted(candidates)
+
+        def backtrack(_path, t):
+            if len(_path) >= 150: return 
+            if t < 0: return
+            if t == 0 and sorted(_path[:]) not in res:
+                res.append(_path[:])
+            
+            for c in candidates:
+                _path.append(c)
+                backtrack(_path, t-c)
+                _path.pop()
+            
+        backtrack([], target)
+
+        return res
