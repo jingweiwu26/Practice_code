@@ -1,0 +1,33 @@
+from typing import List
+
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()  # Sort to handle duplicates
+        res = []
+
+        def backtrack(start, target, path, used):
+            if target == 0:  # Base case: target reached
+                res.append(path[:])
+                return
+
+            for i in range(start, len(candidates)):
+                # Skip duplicates at the same recursion depth
+                if i > start and candidates[i] == candidates[i - 1] and not used[i - 1]:
+                    continue
+
+                # Break if the current number exceeds the target
+                if candidates[i] > target:
+                    break
+
+                # Mark this candidate as used and recurse
+                used[i] = True
+                path.append(candidates[i])
+                backtrack(i + 1, target - candidates[i], path, used)
+                
+                # Backtrack and unmark the candidate as used
+                path.pop()
+                used[i] = False
+
+        used = [False] * len(candidates)  # Initialize the `used` list
+        backtrack(0, target, [], used)
+        return res
