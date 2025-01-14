@@ -1,0 +1,20 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        nums = sorted(nums)
+        
+        def backtrack(idx, c, p):
+            if idx > len(c):
+                return 
+            
+            res.append(p[:])
+            
+            for i in range(len(c)):
+                if i < idx:
+                    continue 
+                p.append(c[i])
+                backtrack(i+1, c, p)
+                p.pop()
+        
+        backtrack(0, nums, [])
+        return res
