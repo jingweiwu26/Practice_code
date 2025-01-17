@@ -1,0 +1,22 @@
+class Solution:
+    def findSubsequences(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        
+        def dfs(c, idx, p):
+            
+            if len(p)>=2 and p[-1] >= p[-2]:
+                res.append(p[:])
+            elif len(p)>=2:
+                return
+            
+            used = set()
+            for i in range(idx, len(c)):
+                if c[i] in used:
+                    continue
+                used.add(c[i])
+                p.append(c[i])
+                dfs(c, i+1, p)
+                p.pop()
+
+        dfs(nums, 0, [])
+        return res
