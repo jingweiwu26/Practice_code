@@ -33,3 +33,27 @@ class Solution(object):
             res.append(node.val)
             current = next
         return res
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        res = []
+        queue = [root]
+        while queue:
+            temp = []
+            res.append([n.val for n in queue][-1])
+            for n in queue:
+                if n.left:
+                    temp.append(n.left)
+                if n.right:
+                    temp.append(n.right)
+            queue = temp
+        
+        return res
