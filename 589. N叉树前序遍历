@@ -1,0 +1,23 @@
+/**
+ * // Definition for a _Node.
+ * function _Node(val, children) {
+ *    this.val = val;
+ *    this.children = children;
+ * };
+ */
+
+/**
+ * @param {_Node|null} root
+ */
+ 
+    
+var preorder = function(root) {
+    let res = []
+    const dfs = function(n){
+        if (!n) return
+        res.push(n.val)
+        for (let node of n.children){
+            dfs(node)}}
+    dfs(root)
+    return res
+};
