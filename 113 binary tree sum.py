@@ -59,3 +59,27 @@ class Solution(object):
                 self.helper(node.left, sum, res, path+[node.left.val])
             if node.right:
                 self.helper(node.right, sum, res, path+[node.right.val])
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        res = []
+        def backtrack(p, n, t):
+            
+            if not n: return
+            p.append(n.val)
+            t-= n.val
+            if t==0 and not n.left and not n.right:
+                res.append(p[:])
+
+            backtrack(p, n.left, t)
+            backtrack(p, n.right, t)
+            p.pop()  
+            
+        backtrack([], root, targetSum)
+        return res
