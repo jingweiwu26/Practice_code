@@ -34,3 +34,29 @@ class Solution(object):
             self._pathSum(root.left, sub_sum, cur + [root.val], ans)
         if root.right:
             self._pathSum(root.right, sub_sum, cur + [root.val], ans)
+            
+            
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        
+        def backtrack(n, t):
+            
+            if not n: return False
+            
+            if t==n.val and n.left is None and n.right is None:return True
+            
+            if n.left is None and n.right is None: return False
+            
+            if backtrack(n.left, t-n.val): return True
+            if backtrack(n.right, t-n.val):
+                return True
+            return False
+        
+        return backtrack(root, targetSum)
+            
