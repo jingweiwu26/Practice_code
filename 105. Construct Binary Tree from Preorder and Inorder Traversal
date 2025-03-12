@@ -30,3 +30,29 @@ class Solution:
         node.left = self.buildTree(preorder[1: l+1], inorder[:l])
         node.right = self.buildTree(preorder[l+1:], inorder[l+1:])
         return node
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        
+        def traverse(pre_l, in_l):
+
+            if not pre_l or not in_l:
+                return None
+            
+            n = pre_l[0]
+            root = TreeNode(n)
+            root_index = in_l.index(n)
+
+            root.left = traverse(pre_l[1:1+root_index], in_l[:root_index])
+            root.right = traverse(pre_l[1+root_index:], in_l[root_index+1:])
+
+            return root
+        
+        return traverse(preorder, inorder)
