@@ -8,3 +8,28 @@ class Solution:
             for j in range(i):
                 if envelopes[i][1]>envelopes[j][1]:
                     dp[i]=max(dp[i], dp[j]+1)
+
+
+from bisect import bisect_left
+from typing import List
+
+class Solution:
+    def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
+        if not envelopes:
+            return 0
+        
+        # 1. 排序：宽度升序，高度降序
+        envelopes.sort(key=lambda x: (x[0], -x[1]))
+        
+        # 2. 取出高度
+        heights = [h for _, h in envelopes]
+        
+        # 3. 在高度上求 LIS
+        lis = []
+        for h in heights:
+            idx = bisect_left(lis, h)
+            if idx == len(lis):
+                lis.append(h)
+            else:
+                lis[idx] = h
+        return len(lis)
