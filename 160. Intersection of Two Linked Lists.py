@@ -55,3 +55,13 @@ class Solution(object):
                 return cur
             cur = cur.next
         return 
+        
+        
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        pa = headA
+        pb = headB
+        while pa != pb:
+            pa=pa.next if pa else headB
+            pb= pb.next if pb else headA
+        return pa
