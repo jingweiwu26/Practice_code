@@ -47,3 +47,30 @@ class Solution:
         else:
             lis[-n-1].next = lis[-n-1].next.next
         return res
+        
+        
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        dummy = ListNode(-1)
+        dummy.next = head
+        t = self.find_nth_from_end(dummy, n)
+        t.next = t.next.next
+        return dummy.next
+
+    def find_nth_from_end(self, head, n):
+        p1 = head
+        for i in range(n+1):
+            p1 = p1.next
+        p2 = head
+        while p1:
+            p1 = p1.next
+            p2 = p2.next
+        return p2
+            
+        
