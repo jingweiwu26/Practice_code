@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+we# -*- coding: utf-8 -*-
 """
 Created on Wed Feb 28 22:54:43 2018
 
@@ -50,3 +50,24 @@ class Solution(object):
                     self.s.add(current)
                     stack.append(current.left)
         return res
+        
+        
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        res = []
+        def tra(n):
+            if not n:
+                return
+            tra(n.left)
+            res.append(n.val)
+            tra(n.right)
+            
+        tra(root)
+        return res
+        
