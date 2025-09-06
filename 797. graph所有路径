@@ -1,0 +1,21 @@
+class Solution:
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+        
+        res = []
+        path = []
+        self.tra(graph, 0, res, path)
+        return res
+        
+    def tra(self, graph, s, res, path):
+        
+        path.append(s)
+        sz = len(graph)
+        if s == sz - 1:
+            res.append(path.copy())
+            path.pop()
+            return
+        
+        for n in graph[s]:
+            self.tra(graph, n, res, path)
+        path.pop()
+        
