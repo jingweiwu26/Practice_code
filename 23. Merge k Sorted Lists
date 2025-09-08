@@ -42,3 +42,28 @@ class Solution:
             x = x.next
         return dummy.next
 """
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        dummy = ListNode(-1)
+        p = dummy
+        pq = list()
+        import heapq
+        for idx, n in enumerate(lists):
+            if n is not None:
+                heapq.heappush(pq, (n.val, idx, n))
+            
+        while pq:
+            _,idx,n = heapq.heappop(pq)
+            p.next =n
+            p = p.next
+            n=n.next
+            if n is not None:
+                heapq.heappush(pq, (n.val, idx, n))
+        return dummy.next
+
