@@ -1,0 +1,16 @@
+class Solution:
+    def minOperations(self, nums: List[int], x: int) -> int:
+        l=0
+        r=0
+        target = sum(nums) - x
+        max_len = -1
+        window_sum=0
+        while r < len(nums):
+            window_sum+=nums[r]
+            r+=1
+            while l <r and target <window_sum:
+                window_sum-=nums[l]
+                l+=1
+            if window_sum == target:
+                max_len= max(max_len, r-l)
+        return len(nums)-max_len if max_len!=-1 else -1
