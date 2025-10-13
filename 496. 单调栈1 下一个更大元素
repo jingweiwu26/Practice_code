@@ -1,0 +1,22 @@
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        _nums2 = self.f(nums2)
+        dic = {}
+        for i in range(len(nums2)):
+            dic[nums2[i]] = _nums2[i]
+        res = []
+        for i in nums1:
+            res.append(dic[i])
+        return res
+    
+    def f(self,lis):
+        stk = []
+        res = [-1] * len(lis)
+        for i in range(len(lis)-1, -1, -1):
+            while stk and lis[i]>=stk[-1]:
+                stk.pop()
+            
+            res[i] = stk[-1] if stk else -1
+            stk.append(lis[i])
+        return res
+        
