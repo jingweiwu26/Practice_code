@@ -71,3 +71,30 @@ class Solution:
         
         return 1 + max(self.maxDepth(root.left),
             self.maxDepth(root.right))
+            
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        depth = 0
+        res = 0
+
+        def traverse(node):
+            nonlocal depth, res  # allows inner function to modify outer variables
+            if not node:
+                return
+
+            # Preorder position — enter node
+            depth += 1
+
+            # Update max depth when hitting a leaf
+            if not node.left and not node.right:
+                res = max(res, depth)
+
+            # Traverse children
+            traverse(node.left)
+            traverse(node.right)
+
+            # Postorder position — leave node
+            depth -= 1
+
+        traverse(root)
+        return res
