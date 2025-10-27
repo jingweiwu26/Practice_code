@@ -56,3 +56,23 @@ class Solution:
             return root
         
         return traverse(preorder, inorder)
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        return self.build(preorder, inorder)
+
+    def build(self, pre_order, in_order):
+        if not pre_order: return
+        node_v = pre_order[0]
+        idx = in_order.index(node_v)
+        n = TreeNode(node_v)
+        n.left = self.build(pre_order[1: 1+idx], in_order[:idx])
+        n.right = self.build(pre_order[idx+1:], in_order[idx+1:])
+        return n
