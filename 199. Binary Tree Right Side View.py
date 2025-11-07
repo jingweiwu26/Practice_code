@@ -57,3 +57,35 @@ class Solution:
             queue = temp
         
         return res
+        
+        
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    
+    def __init__(self):
+        self.res =[]
+        self.depth=0
+        
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        
+        self.traverse(root)
+        return self.res
+    
+    
+    def traverse(self, node):
+        if not node: return
+        
+        self.depth+=1
+        if len(self.res) < self.depth:
+            self.res.append(node.val)
+        
+        self.traverse(node.right)
+        self.traverse(node.left)
+        self.depth -=1
+        
+        
