@@ -1,0 +1,32 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    
+    def __init__(self):
+        self.res = ''
+        self.path = ''
+    def smallestFromLeaf(self, root: Optional[TreeNode]) -> str:
+        
+        self.traverse(root)
+        return self.res
+    
+    def traverse(self, node):
+        if not node: return
+        
+        if node.left is None and node.right is None:
+            p = self.path +chr(ord('a') + node.val) 
+    
+            if not self.res:
+                self.res = p[::-1]
+            else:
+                self.res = min(self.res, p[::-1])
+        
+        self.path += chr(ord('a') + node.val)
+        self.traverse(node.left)
+        self.traverse(node.right)
+        self.path = self.path[:-1]
+        
